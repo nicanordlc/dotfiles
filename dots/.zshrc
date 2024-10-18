@@ -24,7 +24,7 @@ setopt MENU_COMPLETE
 unsetopt HIST_VERIFY
 
 # Source FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+. <(fzf --zsh)
 
 # File Descriptor stuff
 unsetopt MULTIOS

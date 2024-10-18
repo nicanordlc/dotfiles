@@ -4,19 +4,15 @@
 
 # Uses fzf to search for files and open then with your default editor
 # ===================================================================
-function __edit_file_widget {
-    local FILES
-    FILES="$(__fsel)"
-    if [ -z "$FILES" ]
-    then
-        zle reset-prompt
-        return 1
+__edit_files() {
+    local selected_files
+    selected_files=$(eval $FZF_DEFAULT_COMMAND | fzf -m)  # Find all files in the current directory
+    if [[ -n "$selected_files" ]]; then
+        $EDITOR $(echo $selected_files)
     fi
-    eval "$EDITOR $FILES"
-    zle reset-prompt
 }
-zle -N __edit_file_widget
-bindkey -M viins '^E' __edit_file_widget
+bindkey -M viins '^e' __edit_files
+zle -N __edit_files
 
 # map 'C-z' to 'fg' command, this would allow you to toggle
 # between your current program and the terminal
