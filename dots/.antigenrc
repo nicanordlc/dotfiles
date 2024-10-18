@@ -3,7 +3,7 @@
 
 case "$(uname -s)" in
     [Dd]arwin)
-        . /usr/local/share/antigen/antigen.zsh ;;
+	. /opt/homebrew/share/antigen/antigen.zsh ;;
     *)
         . /usr/share/zsh/share/antigen.zsh ;;
 esac

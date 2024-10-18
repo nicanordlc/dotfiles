@@ -15,10 +15,24 @@
 # Apps #
 #      #
 ########
-,curl,off,
 ,jq,on,
-,tree,off,
+,fzf,on,
+,watch,on,
+,tree,on,
+,ncdu,on,
+,neovim,on,
+,tmux,on,
+,shellcheck,on,
+,fd,on,
+,ripgrep,on,
+,asciinema,off,Terminal recorder
+,figlet,off,ASCII art text
+,vifm,on,
+,gnupg,on,
+,bat,off,Cat with hightlight
 f,rust,off,
+,httpie,off,User-friendly curl
+,direnv,on,
 
 ######
 #    #
@@ -33,35 +47,35 @@ g,github.com/Dentrax/GMDB,off,Movie Library in GO *arrg*
 # NodeJS #
 #        #
 ##########
-f,nvm,off,
-,yarn,off,
-node,diff-so-fancy,off,
+f,nvm,on,
+,yarn,on,
+node,diff-so-fancy,on,
 
 ########
 #      #
 # Ruby #
 #      #
 ########
-f,rvm,off,
+f,rvm,on,
 gem,lolcat,off,
+gem,neovim,on,
 
 ##########
 #        #
 # Python #
 #        #
 ##########
-,python3,off,
-,python-pip,off,
-pip,doge,off,
-pip,pip,off,
+,python3,on,
+,pipx,on,
+pip,doge,on,
 
 #######
 #     #
 # ZSH #
 #     #
 #######
-,zsh,off,
-f,ohmyzsh,off,
+,zsh,on,
+f,ohmyzsh,on,
 
 #############
 #           #

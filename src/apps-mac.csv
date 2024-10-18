@@ -15,13 +15,47 @@
 # GUI Apps #
 #          #
 ############
-a,iterm2,off,
+a,iterm2,on,
+a,spotify,on,
+a,zoom,on,
+a,discord,on,
+a,obs,off,
+a,streamlabs-obs,off,
+a,cyberduck,on,
+a,keka,on,
+a,vlc,on,
+a,keycastr,on,
+a,firefox,on,
+a,brave-browser,on,
+a,google-chrome,on,
+a,gimp,on,
+a,sequel-pro,on,
+a,orbstack,on,
+a,rectangle,on,
 
 ########
 #      #
 # Apps #
 #      #
 ########
-a,font-firacode-nerd-font-mono,off,
-,htop,off,
+a,font-fira-code-nerd-font,on,
+,htop,on,
+,pinentry-mac,on,
+,ctop,on,
+,openssl@3,off,
 
+#######
+#     #
+# Dev #
+#     #
+#######
+,gleam,off,
+,phpbrew,off,
+,pipenv,on,
+
+#################
+#               #
+# Antigen / ZSH #
+#               #
+#################
+,antigen,on,
