@@ -1,0 +1,75 @@
+#!/bin/bash
+# vim: ft=zsh:ts=4:sw=4
+# shellcheck disable=2010,1090,2034
+
+# init hooks auto-function
+autoload -U add-zsh-hook
+
+# load env files
+__load_env(){
+    local ENV_FILE file_found
+    # TODO: Maybe this should load multiple files ¯\\_(ツ)_/¯
+    ENV_FILE=".nic"
+    ls -a |
+        grep "^$ENV_FILE" 2> /dev/null |
+        sed "s:^:$PWD/:" |
+        while read -rs file_found ; do
+            if [ -n "$file_found" ]; then
+                echo "Using environment file '$file_found'"
+                # TODO: check if the variables has the `export` prefix and if
+                # not add it on the fly
+                . "$file_found"
+            fi
+        done
+}
+chpwd_functions+=(__load_env)
+__load_env
+
+# use .nvmrc to load node project version
+__load_nvmrc(){
+    local node_version nvmrc_path nvmrc_node_version
+    node_version="$(nvm version)"
+    nvmrc_path="$(nvm_find_nvmrc)"
+    if [ -n "$nvmrc_path" ]; then
+        nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+        if [ "$nvmrc_node_version" = "N/A" ]; then
+            nvm install
+        elif [ "$nvmrc_node_version" != "$node_version" ]; then
+            nvm use
+        fi
+    elif [ "$node_version" != "$(nvm version default)" ]; then
+        echo "Reverting to nvm default version"
+        nvm use default
+    fi
+}
+chpwd_functions+=(__load_nvmrc)
+__load_nvmrc
+
+# change emoji in the PS1
+__change_emoji(){
+    local EMOJIS EMOJI_INDEX
+    if ! [[ $(uname -s) =~ ^[Dd]arwin$ ]] && [ -z "$DISPLAY" ]; then
+        EMOJIS=(
+            "(づ￣ ³￣)づ"
+            "(ง •̀_•́)ง"
+            "(╥_╥)"
+            "(●__●)"
+            "(╯°□°）╯︵ ┻━┻"
+        )
+    else
+        EMOJIS=(
+            "🌟"
+            "🤑"
+            "💰"
+            "🥺"
+            "🤩"
+            "🤬"
+            "🥱"
+            "🤨"
+        )
+    fi
+    EMOJI_INDEX=$((RANDOM % ${#EMOJIS[@]} + 1))
+    SPACESHIP_CHAR_SUFFIX="${EMOJIS[$EMOJI_INDEX]} "
+}
+chpwd_functions+=(__change_emoji)
+__change_emoji

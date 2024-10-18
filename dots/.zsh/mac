@@ -1,0 +1,22 @@
+#!/bin/bash
+# vim: ft=zsh:ts=4:sw=4
+# shellcheck disable=2155
+
+############
+#          #
+# Defaults #
+#          #
+############
+
+# Java
+# ====
+if /usr/libexec/java_home -v 1.7 &> /dev/null; then
+    export JAVA_HOME="$(/usr/libexec/java_home -v 1.7)"
+fi
+
+########
+#      #
+# Path #
+#      #
+########
+PATH="$PATH:${HOME}/Library/Python/3.7/bin/"

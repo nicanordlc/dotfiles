@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Displays files in a tree view
+
+IGNORE=(
+  node_modules
+  build
+  bower_components
+  .git*
+  elm-stuff
+)
+IGNORE_TREE=$(tr " " "|" <<<"${IGNORE[*]}")
+
+while getopts ":d:" OPT
+do
+  case $OPT in
+    d)
+      LEVEL=$OPTARG
+      ;;
+    :)
+      echo "No argument provided for option (-$OPTARG)"
+      EXIT_FLAG="1"
+      ;;
+    \?)
+      echo "Invalid option (-$OPTARG)"
+      EXIT_FLAG="1"
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+[ -z "$EXIT_FLAG" ] || exit 1
+
+clear
+tree -I "${IGNORE_TREE[*]}" -CL $((LEVEL + 1)) -a "$@"
+

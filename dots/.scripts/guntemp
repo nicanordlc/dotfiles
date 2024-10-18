@@ -1,0 +1,34 @@
+#!/bin/bash -e
+# shellcheck disable=2016,2034
+
+TEMP_BRANCH_NAME="temp"
+
+__get_temps(){
+    git log --pretty=format:'%s' --grep='^temp' |
+    wc -w |
+    tr -d '[:space:]'
+}
+
+__saved_branch(){
+    local BRANCH
+    BRANCH=$(<.branch)
+    echo "${BRANCH:-master}"
+    rm -rf .branch
+}
+
+GIT_COMMANDS=(
+    'fetch -v'
+    'checkout $TEMP_BRANCH_NAME'
+    'pull origin $TEMP_BRANCH_NAME'
+    'reset --hard origin/$TEMP_BRANCH_NAME'
+    'reset --soft HEAD~$(__get_temps)'
+    'reset'
+    'checkout $(__saved_branch)'
+    'push --delete origin $TEMP_BRANCH_NAME'
+    'branch -D $TEMP_BRANCH_NAME'
+)
+
+IFS=$'\n'
+for COMMAND in ${GIT_COMMANDS[*]}; do
+    eval "git $COMMAND"
+done

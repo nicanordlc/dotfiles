@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+# Merges current branch on master
+
+CURRENT_BRANCH=$(gcb)
+PREFIX=$(pwd |
+    sed -e 's:^.::' -e 's:/:-:g' |
+    tr '[:upper:]' '[:lower:]')
+PRUNE_BRANCHES="${HOME}/.dots/${PREFIX}-prune-remote-branches"
+
+git checkout "$(gmain)"
+git fetch && git pull --rebase origin "$(gmain)"
+
+git merge --ff-only "$CURRENT_BRANCH"
+echo "$CURRENT_BRANCH" >> "$PRUNE_BRANCHES"

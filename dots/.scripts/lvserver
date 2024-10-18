@@ -1,0 +1,31 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+BROWSERS_MAC=(
+    /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+)
+
+# exit if live-server is not installed
+if ! command -v live-server; then
+    echo "@npm : live-server not installed"
+    exit 1
+fi
+
+# Parse options
+while getopts ":rp:o:" OPT; do
+    case $OPT in
+    r) random=$RANDOM ;;
+    p) port=$OPTARG ;;
+    o) cmd="--entry-file=$OPTARG" ;;
+    *) port=8000 ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+# compute port for later use below
+port="--port=${port:-${random:-8000}}"
+
+# run the process
+eval "live-server --cors $port ${cmd:-} --no-browser"
+
+exit 0

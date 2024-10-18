@@ -1,0 +1,10 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+source_value=$(pulseaudio-ctl | grep "source muted" | cut -d: -f2)
+
+if [[ $source_value =~ yes ]]; then
+    echo "Microphone ❌"
+else
+    echo "Microphone ✅"
+fi

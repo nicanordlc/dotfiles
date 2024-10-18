@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+FILE="${1:?Provide a file to get its sha256...}"
+
+openssl dgst -sha256 "$FILE" | cut -d' ' -f2

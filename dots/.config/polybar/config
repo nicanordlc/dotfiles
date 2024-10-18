@@ -1,0 +1,311 @@
+; ####################
+; #                  #
+; # Global variables #
+; #                  #
+; ####################
+
+;{{{ colors
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #222
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+; }}}
+
+; ########
+; #      #
+; # Bars #
+; #      #
+; ########
+
+;{{{ bar/main
+
+[bar/main]
+monitor = ${env:MONITOR}
+width = 100%
+height = 27
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; line below workspaces
+line-size = 3
+line-color = #f00
+
+; border for the bar
+border-size = 4
+border-color = #000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = FuraCode Nerd Font:pixelsize=10;1
+font-1 = siji:pixelsize=10;1
+font-2 = Noto Color Emoji:pixelsize=4
+
+modules-left = i3
+modules-center = temperature date battery
+modules-right = filesystem cpu memory wlan
+
+tray-position = right
+tray-padding = 2
+;tray-background = #0063ff
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+; }}}
+
+; ###########
+; #         #
+; # Modules #
+; #         #
+; ###########
+
+;{{{ module/xwindow
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+; }}}
+
+;{{{ module/filesystem
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#0a81f5} %mountpoint%%{F-}: %percentage_used%%
+label-mounted-underline = #0a81f5
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+;}}}
+
+;{{{ module/i3
+
+[module/i3]
+label-format = %index%:%icon%
+
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;聆
+ws-icon-3 = 4;
+ws-icon-4 = 5;ﭮ
+ws-icon-default = ﰤ
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = ${self.label-format}
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = ${self.label-format}
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = ${self.label-format}
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = ${self.label-format}
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+;}}}
+
+;{{{ module/mpd
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+;}}}
+
+;{{{ module/cpu
+
+[module/cpu]
+underline = #f90000
+
+type = internal/cpu
+interval = 2
+format-prefix = ""
+format-prefix-foreground = ${self.underline}
+format-underline = ${self.underline}
+label = %percentage:2%%
+
+;}}}
+
+;{{{ module/memory
+
+[module/memory]
+underline = #4bffdc
+
+type = internal/memory
+interval = 2
+format-prefix = " RAM "
+format-prefix-foreground = ${self.underline}
+format-underline = ${self.underline}
+
+label = "%gb_used% / %gb_total%"
+
+;}}}
+
+;{{{ module/wlan
+
+[module/wlan]
+underline = #9f78e1
+
+type = internal/network
+interface = ${env:WIRELESS_NAME}
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline = ${self.underline}
+
+label-connected = %essid% ↑%upspeed% ↓%downspeed%
+
+ramp-signal-0 = 直
+ramp-signal-1 = 直
+ramp-signal-2 = 
+ramp-signal-foreground = ${self.underline}
+
+;}}}
+
+;{{{ module/date
+
+[module/date]
+underline = #0a6cf5
+
+type = internal/date
+interval = 5
+
+date = %Y-%m-%d%
+
+time = %r
+
+format-prefix = " "
+format-prefix-foreground = ${self.underline}
+format-underline = ${self.underline}
+
+label = %date% | %time%
+
+;}}}
+
+;{{{ module/battery
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP0
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #ffb52a
+
+format-discharging = <animation-discharging> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${self.format-charging-underline}
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${self.format-charging-underline}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${self.format-charging-underline}
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+animation-discharging-foreground = ${self.format-charging-underline}
+animation-discharging-framerate = 750
+
+;}}}
+
+;{{{ module/temperature
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <label>
+format-prefix = " "
+format-prefix-foreground = ${self.format-underline}
+format-underline = #f50a4d
+format-warn = <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+;}}}
+
+; ###########
+; #         #
+; # Setting #
+; #         #
+; ###########
+
+;{{{ default
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+;}}}
+
+; vim:ft=dosini

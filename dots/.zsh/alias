@@ -1,0 +1,177 @@
+#!/bin/bash
+# vim: ft=zsh:ts=4:sw=4
+# shellcheck disable=2142
+
+###############
+#             #
+# Git Aliases #
+#             #
+###############
+
+# Utils
+# =====
+alias gb='git branch -a'
+alias gs='clear && git status 2> /dev/null'
+alias gl='f(){git log --grep="$1"};f'
+alias co='git checkout'
+alias gclean='git clean -df'
+alias lsgst='git stash list'
+alias gr='git remote'
+alias grl='git reflog'
+alias gst='git stash'
+alias gsts='git stash save'
+alias gstp='git stash show -p'
+alias gsta='git stash apply'
+alias grs='git reset'
+alias uptrefs='git fetch origin --prune'
+alias gdir='echo $( cd $(git rev-parse --show-cdup); pwd)'
+
+# Fetch
+# =====
+alias gf='git fetch -v'
+alias gfup='git fetch upstream'
+
+# Add
+# ===
+alias ga='git add'
+alias gall='git add -A && gs'
+alias gau='git add -u'
+
+# Diff
+# ====
+alias gd='clear && git diff'
+alias gds='clear && git diff --staged'
+alias gdt='git difftool'
+alias gdm='git diff remotes/origin/master..'
+alias gdms='git diff --stat --color master..'
+
+# Pull/Push
+# =========
+alias gp='git pull --rebase origin $(gcb)'
+alias gpsm='git push origin $(gmain)'
+
+# Merge
+# =====
+alias gmt='git mergetool'
+alias gma='git merge --abort'
+
+# Rebase
+# ======
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbm='git rebase master'
+alias grbc='git rebase --continue'
+alias gmc='git merge --continue'
+
+# Commit
+# ======
+alias gcm='git commit'
+alias gcz='git cz'
+alias gcma='git commit --amend'
+alias gcman='git commit --amend --no-edit --no-verify'
+
+# Release
+alias grls='npx semantic-release'
+
+#################
+#               #
+# Other Aliases #
+#               #
+#################
+
+# LS'
+# ====
+alias lsgem='gem list'
+alias lsnvm='nvm list'
+alias lspip='pip3 list'
+alias lsnpm='npm ls --depth 0'
+alias lspath='for I in $(tr : " " <<<$PATH);do echo $I; done'
+alias lsfonts='fc-list'
+alias lspackages='pacman -Qm'
+
+# NVM
+# ===
+alias nvmv='nvm current'
+alias nvmd='nvm alias default '
+
+# NPM
+# ===
+alias npmprune='npm prune && npm i && npm i'
+alias rstnpm='clear && rm -rf ./node_modules && npm i && npm i'
+alias rnpm='npm remove'
+
+# cds
+# ===
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias cdssh='cd ${HOME}/.ssh && ls'
+alias cdvagrant='cd /vagrant/'
+
+# Docker
+# ======
+alias dk='docker'
+alias dkc='docker-compose'
+alias dki='docker images -a'
+alias dkps='docker ps'
+alias dkrit='docker run -it'
+alias dkeit='docker exec -it'
+alias dkinfo='clear && dki && echo -e "\n\n#######################\n\n" && dkps -a'
+alias dkprune='docker rmi $(docker images -f "dangling=true" -q)'
+
+# Elm
+# ===
+alias em='elm make'
+alias er='elm repl'
+alias epi='elm package install'
+
+# tmux
+# ====
+alias tmuxinstall="~/.tmux/plugins/tpm/bin/install_plugins"
+alias tmuxupdate="~/.tmux/plugins/tpm/bin/update_plugins"
+alias tmuxclean="~/.tmux/plugins/tpm/bin/clean_plugins"
+alias tma='tmux attach'
+
+# bun
+# ===
+alias b="bun"
+alias ba="bun install"
+alias bad="bun install -d"
+alias brm="bun remove"
+alias bln="bun lint"
+alias bst="bun run start"
+alias bd="bun run dev"
+alias bx="bunx"
+alias bb="bun run build"
+
+##########
+#        #
+# Random #
+#        #
+##########
+
+alias xx='exit'
+alias bgdisown='bg && disown'
+alias poweroff='shutdown -P now'
+alias susu='sudo su'
+alias del='rm -rf'
+alias clr='clear && '
+alias cpp='rsync -aP '
+alias v='nvim'
+alias less='less -R'
+alias doge-quotes='while true; do doge | lolcat -a -d 100 -s 100 -p 1; done'
+alias testunicode='curl -sL http://www.cl.cam.ac.uk/\~mgk25/ucs/examples/UTF-8-demo.txt'
+alias tp='command -v'
+alias xcat='xargs cat'
+alias trackpadgesture='libinput-gestures-setup'
+alias termitereload='killall -USR1 termite'
+alias btc='bluetoothctl'
+alias vpn='sudo openfortivpn -c ~/.config/fortivpn/config'
+alias reset-bluetooth='sudo rfkill block bluetooth && sleep 0.1 && sudo rfkill unblock bluetooth;'
+alias reset-xmodmap='setxkbmap'
+alias syncclock='timedatectl set-ntp true'
+alias diskhealth='smartctl --all /dev/disk0'
+alias hostsupdate='sudo killall -HUP mDNSResponder'
+alias resetaudio='sudo killall coreaudiod'
+alias check='rg -g \!.git --hidden'
+alias checkport='nc -zv ' # <ip> <port>

@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+// epsinfo
+// status bar for: https://github.com/cabaalexander/eps-packages-scrapping-api
+const https = require('http')
+
+// {{{ processData
+const processData = (data) => {
+  const dataObject = JSON.parse(data)
+  const defaultItemsObject = {
+    miami: [],
+    shipped: [],
+    island: [],
+    ready: [],
+  }
+
+  const itemsReducer =   (acc, item) => {
+    const statusMapper = {
+      'status1': 'miami',
+      'status2': 'shipped',
+      'status7': 'ready',
+    }
+
+    const itemStatus = statusMapper[item.status] || 'island'
+
+    if (itemStatus) {
+      acc[itemStatus].push(item)
+    }
+
+    return acc
+  }
+
+  const {miami, shipped, island, ready} = dataObject.items.reduce(
+    itemsReducer,
+    defaultItemsObject,
+  )
+
+  return `📦: 🏬 ${miami.length} - ✈️  ${shipped.length} - 🏝  ${island.length} - 🏠 ${ready.length}`
+}
+// }}}
+
+// {{{ request
+const options = {
+  hostname: '0.0.0.0',
+  port: 8000,
+  path: '/',
+  method: 'GET'
+}
+
+const req = https.request(options, res => {
+  res.on('data', data => {
+    process.stdout.write(processData(data))
+  })
+})
+
+req.on('error', error => {
+  console.error(error)
+  process.stdout.write('📦')
+})
+
+req.end()
+// }}}

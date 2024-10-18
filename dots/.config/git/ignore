@@ -1,0 +1,18 @@
+# VIM
+Session*.vim*
+*.un~
+
+# NPM
+.tern-port
+
+# custom
+.nic
+
+# vscode
+.DS_Store
+.vscode
+
+# nexstar
+plugins/es-wp-query
+plugins/apple-news
+client-mu-plugins/jetpack

@@ -1,0 +1,53 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+FILES_CREATED=()
+
+# {{{ Script templates
+BASH_TEMPLATE=$(
+cat <<EOF
+#!/bin/bash
+set -Eeuo pipefail
+EOF
+)
+
+NODE_TEMPLATE=$(
+cat <<EOF
+#!/usr/bin/env node
+EOF
+)
+# }}}
+
+make_script(){
+    local script_name template
+    script_name=$1
+    template=${2:-$BASH_TEMPLATE}
+
+    echo "$template" > "$script_name"
+
+    chmod u+x "$script_name"
+    echo ":: Script \`$script_name\` created ::"
+}
+
+main(){
+    local script_name
+    local opt
+    local scripts
+
+    scripts=${@:-script.sh}
+
+    for script_name in $scripts; do
+        FILES_CREATED+=("$script_name")
+        file_extension="${script_name#*.}"
+
+        if [ "$file_extension" == "js" ]; then
+            make_script "$script_name" "$NODE_TEMPLATE"
+        else
+            make_script "$script_name" "$BASH_TEMPLATE"
+        fi
+    done
+}
+
+main "$@"
+
+eval "$EDITOR -c'norm G' ${FILES_CREATED[*]}"

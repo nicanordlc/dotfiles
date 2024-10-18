@@ -1,0 +1,26 @@
+# shellcheck disable=1094,1091
+# vim: ft=zsh
+
+case "$(uname -s)" in
+    [Dd]arwin)
+        . /usr/local/share/antigen/antigen.zsh ;;
+    *)
+        . /usr/share/zsh/share/antigen.zsh ;;
+esac
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Packages
+antigen bundles <<EOBUNDLES
+    yarn
+    rupa/z
+    zsh-users/zsh-syntax-highlighting
+    zsh-users/zsh-completions
+EOBUNDLES
+
+# Load the theme.
+antigen theme https://github.com/denysdovhan/spaceship-prompt
+
+# Tell Antigen that you're done.
+antigen apply

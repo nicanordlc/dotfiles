@@ -1,0 +1,65 @@
+#!/bin/bash
+# shellcheck disable=2220
+set -Eeuo pipefail
+
+# dsply - Shows a notification depending on what OS you are
+# $ dsply [OPTIONS] [COMMAND]
+
+# USAGE:
+#   $ dsply echo "Hello notification"
+#   $ sleep 3 && dsply -t"Sleeping" -m"sshhh"
+
+# OPTIONS:
+#   -t      Sets the title of the notification
+#   -m      Sets the body of the notification
+#   -b      Make a sound if available (on mac)
+
+# COMMAND:
+#   Runs the command and then display information on finish example:
+#   $ dsply echo "hello"
+#   # hello (and display the notification)
+
+TITLE="Title"
+BODY="Hello"
+
+mac(){
+    osascript -e "display notification \"$BODY\" \
+        with title \"$TITLE\" ${SOUND:-}"
+}
+
+tmux_dsply(){
+    tmux display "$TITLE: $BODY"
+}
+
+# Parse options
+while getopts ":bt:m:" OPT
+do
+  case $OPT in
+      t) TITLE="$OPTARG" ;;
+      m) BODY="$OPTARG" ;;
+      b) SOUND="sound name \"Submarine\"" ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if [ ${#@} -gt 0 ]; then
+    TITLE="Done"
+    BODY="$*"
+fi
+
+case "$(uname -s)" in
+    [Dd]arwin)
+        eval "$@"
+        mac
+        ;;
+    *)
+        if [[ "$TMUX" ]]
+        then
+            eval "$@" || true
+            tmux_dsply
+        else
+            echo "'$0' Cannot be used at this time ¯\\_(ツ)_/¯"
+        fi
+        ;;
+esac
+

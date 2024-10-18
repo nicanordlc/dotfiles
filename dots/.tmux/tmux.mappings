@@ -1,0 +1,53 @@
+# vim: ft=tmux
+
+# Set prefix to Ctrl-Space
+set -g prefix C-Space
+
+# hide bar
+bind C-h set -g status
+
+# Reset a pane
+bind C-k respawn-pane -k
+
+# Create a new session
+bind C-n command-prompt -p "Session's Name:" "new-session -c $HOME -AD -s %%"
+
+# Synchronize panes
+bind S setw synchronize-panes
+
+# Move to the last active session
+bind l switch-client -l
+
+# Move to the last active window
+bind C-\\ last-window
+
+# Better split
+bind \\ split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+# Bind clear screen to `<prefix> + C-l
+bind C-l send-keys 'C-l'
+
+# Kill TMUX Server
+bind C-q kill-server
+
+# Copy vi-mode
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+bind -T copy-mode-vi r send-keys -X rectangle-toggle
+
+# Resize panes
+bind -r H resize-pane -L 4
+bind -r J resize-pane -D 4
+bind -r K resize-pane -U 4
+bind -r L resize-pane -R 4
+
+# Swap window
+TMUX_SWAP_WINDOWS="#(~/.tmux/scripts/listwindows.sh)"
+bind C-m command-prompt -p " #S ${TMUX_SWAP_WINDOWS} : Select window to swap :" "swap-window -t %%"
+
+# show tmux messages
+bind M show-messages
+
+# check eps-scapping-api
+bind e run-shell "curl localhost:8000 | jq ."

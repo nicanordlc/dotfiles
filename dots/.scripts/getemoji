@@ -1,0 +1,195 @@
+#!/bin/bash
+set -e -o pipefail
+
+# This script gets an emoji from an URL
+#
+# This script UX is way better when you have 'fzf' installed ;)
+#
+# You can get emojis from two sources
+# which are unicode.org and luke's
+# e.g.
+# getemoji -s luke (This will get the emojis from luke's)
+#
+# for no user interaction you can pass the emoji as a parameter
+# e.g.
+# getemoji [emoji-name]
+
+DEFAULT="https://unicode.org/Public/emoji/1.0/emoji-data.txt"
+DEFAULT_MAPPER="__default_filter"
+SUPPORTED_CLIPBOARDS=(
+    pbcopy
+    xsel
+    xclip
+    lemonade
+    doitclient
+    tmux
+)
+FZF=$(command -v fzf || true)
+
+__show_help(){
+echo "
+getemoji - search for an emoji
+
+USAGE
+    getemoji [option] [emoji-name]
+
+OPTIONS
+    -h          Show help and exit
+
+    -s source   Source from where to take the emoji
+
+SOURCES
+    default
+        https://unicode.org/Public/emoji/1.0/emoji-data.txt
+
+    luke
+    https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.config/emoji
+"
+exit 0
+}
+
+__get_url_and_mapper(){
+    local OPTION=$1
+    case "$OPTION" in
+        luke)
+            URL="https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.config/emoji"
+            MAPPER="__luke_filter"
+            ;;
+        *)
+            URL="$DEFAULT"
+            MAPPER="$DEFAULT_MAPPER"
+            ;;
+    esac
+}
+
+__get_source(){
+    local URL URL_DASHED FILE_PATH CACHE_PATH
+    CACHE_PATH="${HOME}/.cache/getemoji"
+
+    mkdir -p "$CACHE_PATH"
+
+    URL=$1
+    URL_DASHED=$(tr '/' '-' <<<"${URL#*//}")
+
+    FILE_PATH="$CACHE_PATH/${URL_DASHED}"
+
+    if ! cat "$FILE_PATH" 2> /dev/null 
+    then
+        curl -s "$URL" | tee "$FILE_PATH"
+    fi
+}
+
+__get_clipboard(){
+    local CLIP GOOD
+    for CLIP in ${SUPPORTED_CLIPBOARDS[*]}
+    do
+        GOOD=$(command -v "$CLIP")
+        if [ -n "$GOOD" ]
+        then
+            echo "$CLIP"
+            break
+        fi
+    done
+}
+
+__to_clipboard(){
+    local CLIP RETURN_VALUE
+    CLIP=$(__get_clipboard)
+    if [ $# -eq 0 ]
+    then
+        read -rs RETURN_VALUE
+    else
+        RETURN_VALUE=$1
+    fi
+    if [ -z "$RETURN_VALUE" ]
+    then
+        echo "[Error] You tried to copy \"Empty String\" to the clipboard"
+        return 1
+    fi
+    case "$CLIP" in
+        pbcopy)
+            pbcopy <<<"$RETURN_VALUE"
+            echo "$RETURN_VALUE : Copied to clipboard"
+            ;;
+        tmux)
+            if tmux set-buffer "$RETURN_VALUE"
+            then
+                echo "$RETURN_VALUE : Copied to TMUX Clipboard"
+            else
+                echo "TMUX Server might be not running"
+            fi
+            ;;
+        *)
+            echo "$RETURN_VALUE"
+            ;;
+    esac
+}
+
+__to_grep(){
+    local REPLY RETURN_VALUE VAL
+    if [ -n "$PATTERN" ]
+    then
+        VAL="$PATTERN"
+    else
+        read -rp "What emoji do you want? :: " VAL </dev/tty
+    fi
+    RETURN_VALUE=$(grep -i "$VAL" | head -n1)
+    echo
+    if [ -n "$RETURN_VALUE" ]
+    then
+        echo "$RETURN_VALUE"
+    else
+        >&2 echo -e "\nNo match for : $VAL\ntry again..."
+        exit 1
+    fi
+}
+
+__to_filter(){
+    if [ -n "$FZF" ] && [ -z "$PATTERN" ]
+    then
+        fzf
+    else
+        __to_grep
+    fi
+}
+
+__default_filter(){
+    __get_source "$1" \
+        | grep -v "^#" \
+        | cut -d'#' -f2 \
+        | cut -d' ' -f3- \
+        | __to_filter \
+        | sed -E 's/.*\((.*)\).*/\1/g'
+}
+
+__luke_filter(){
+    __get_source "$1" \
+        | cut -d';' -f1 \
+        | __to_filter \
+        | cut -d' ' -f1
+}
+
+# Parse options
+while getopts ":s:h" OPT
+do
+  case $OPT in
+      h)
+          __show_help ;;
+      s)
+          OPTION_VALUE="$OPTARG"
+          ;;
+      *)
+          OPTION_VALUE="$DEFAULT"
+  esac
+done
+shift $((OPTIND - 1))
+
+#First argument
+PATTERN=${1:-""}
+
+__get_url_and_mapper "$OPTION_VALUE"
+
+EMOJI=$(eval "$MAPPER $URL")
+
+[ -n "$EMOJI" ] && __to_clipboard "$EMOJI"
+

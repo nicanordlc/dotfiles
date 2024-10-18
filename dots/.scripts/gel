@@ -1,0 +1,20 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+FIRST_PARAM=${1:-}
+AHEAD=$(gahead)
+
+if [ "$AHEAD" -eq 0 ]; then
+    AHEAD=1
+fi
+
+clear
+files=$(
+    git log -p -"${FIRST_PARAM:-$AHEAD}" --name-status --oneline |
+        grep "^[A-Z]" |
+        cut -f2 |
+        uniq |
+        tr '\n' ' '
+)
+
+eval "${EDITOR:-vim} $files"
