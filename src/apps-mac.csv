@@ -39,6 +39,7 @@ a,rectangle,on,
 #      #
 ########
 a,font-fira-code-nerd-font,on,
+a,font-0xproto-nerd-font,on,
 ,htop,on,
 ,pinentry-mac,on,
 ,ctop,on,
