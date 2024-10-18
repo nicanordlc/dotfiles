@@ -29,7 +29,7 @@
 ,figlet,off,ASCII art text
 ,vifm,on,
 ,gnupg,on,
-,bat,off,Cat with hightlight
+,bat,on,Cat with hightlight
 f,rust,off,
 ,httpie,off,User-friendly curl
 ,direnv,on,

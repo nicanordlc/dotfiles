@@ -6,10 +6,17 @@
 # ===================================================================
 __edit_files() {
     local selected_files
-    selected_files=$(eval $FZF_DEFAULT_COMMAND | fzf -m)  # Find all files in the current directory
+	selected_files=$(
+		eval $FZF_DEFAULT_COMMAND |
+			fzf -m \
+				--height 40 \
+				--preview 'bat --style=plain --color=always --line-range=:500 {}' \
+				--preview-window=right:60%
+	)
     if [[ -n "$selected_files" ]]; then
         $EDITOR $(echo $selected_files)
     fi
+	zle reset-prompt
 }
 bindkey -M viins '^e' __edit_files
 zle -N __edit_files
