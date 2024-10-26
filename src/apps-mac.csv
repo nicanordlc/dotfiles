@@ -38,6 +38,10 @@ a,obsidian,on,
 a,moonlight,on,
 a,sharemouse,on,
 a,raspberry-pi-imager,on,
+a,nordvpn,on,
+a,logi-options+,on,
+a,http-toolkit,on,
+a,proxyman,on,
 
 ########
 #      #
@@ -49,7 +53,7 @@ a,font-0xproto-nerd-font,on,
 ,htop,on,
 ,pinentry-mac,on,
 ,ctop,on,
-,openssl@3,off,
+,openssl@3,on,
 
 #######
 #     #
@@ -57,8 +61,14 @@ a,font-0xproto-nerd-font,on,
 #     #
 #######
 ,gleam,off,
-,phpbrew,off,
 ,pipenv,on,
+,php@8.2,on,
+,composer,on,
+,memcached,on,
+,autoconf,on,
+,libmemcached,on,
+,mkcert,on,
+,nss,on,
 
 #################
 #               #
