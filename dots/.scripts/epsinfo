@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // epsinfo
-// status bar for: https://github.com/cabaalexander/eps-packages-scrapping-api
+// status bar for: https://github.com/nicanordlc/eps-packages-scrapping-api
 const https = require('http')
 
 // {{{ processData

@@ -32,21 +32,6 @@ gps(){
     git push origin "$currentBranch" "${@}"
 }
 
-ginfo(){
-    # Displays current github user, password and ssh key
-    clear
-    git config --global user.name
-    git config --global user.email
-    echo
-
-    if [ -f ~/.ssh/id_rsa.pub ]; then
-        grep -e "\scabaalexander.*$" < ~/.ssh/id_rsa.pub
-        ls -l ~/.ssh/
-    else
-        echo ':: NO SSH AVAILABLE ::'
-    fi
-}
-
 mk(){
     # Creates the directory and cd to it right away
     mkdir -p -- "$1"

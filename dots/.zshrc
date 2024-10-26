@@ -33,15 +33,8 @@ unsetopt MULTIOS
 sourceIfExists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 sourceIfExists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 
-# heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/Users/cabaalexander/Library/Caches/heroku/autocomplete/zsh_setup \
-    && test -f $HEROKU_AC_ZSH_SETUP_PATH \
-    && source $HEROKU_AC_ZSH_SETUP_PATH;
-
-# bun completions
-[ -s "/Users/cabaalexander/.bun/_bun" ] && source "/Users/cabaalexander/.bun/_bun"
-
 # bun
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun" # bun completions
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
