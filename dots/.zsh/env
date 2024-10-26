@@ -12,7 +12,13 @@ export IS_VAGRANT="$(test -d /vagrant && echo "1")"
 
 # Setting fd as the default source for fzf
 # ========================================
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob !.git --no-ignore'
+FZF_IGNORED=(
+	--glob !.git
+	--glob !node_modules
+	--glob !.next
+	--glob !build
+)
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore ${FZF_IGNORED[*]}"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # OH MY ZSH
