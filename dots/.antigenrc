@@ -13,8 +13,6 @@ antigen use oh-my-zsh
 
 # Packages
 antigen bundles <<EOBUNDLES
-    yarn
-    rupa/z
     zsh-users/zsh-syntax-highlighting
     zsh-users/zsh-completions
 EOBUNDLES

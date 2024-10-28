@@ -54,6 +54,10 @@ a,font-0xproto-nerd-font,on,
 ,pinentry-mac,on,
 ,ctop,on,
 ,openssl@3,on,
+,yazi,on,
+,exiftool,on,
+,sevenzip,on,
+,zoxide,on,
 
 #######
 #     #

@@ -1,0 +1,5 @@
+[plugin]
+deps = [{ use = "yazi-rs/plugins:diff", rev = "ad52adf" }, { use = "dedukun/relative-motions", rev = "89d0cb9" }]
+
+[flavor]
+deps = []

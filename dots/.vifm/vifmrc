@@ -514,12 +514,11 @@ nnoremap ,w :set wrap!<cr>
 
 " :mark mark /full/directory/path [filename]
 mark h ~/
-mark d ~/dotfiles
-mark n ~/dotfiles/dots/.config/nvim
 mark D ~/Downloads
-mark v ~/dotfiles/dots/.config/nvim
-mark s /sync
-mark S ~/dotfiles/secrets
+mark d ~/projects/dotfiles
+mark n ~/projects/nvim
+mark v ~/projects/nvim
+mark S ~/projects/secrets
 mark c ~/.config
 mark p ~/projects
 mark w ~/work

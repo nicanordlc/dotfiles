@@ -25,6 +25,7 @@ alias gsta='git stash apply'
 alias grs='git reset'
 alias uptrefs='git fetch origin --prune'
 alias gdir='echo $( cd $(git rev-parse --show-cdup); pwd)'
+alias cleanzshcomp='rm ~/.zcompdump*; compinit'
 
 # Fetch
 # =====
