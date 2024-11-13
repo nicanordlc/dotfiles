@@ -42,6 +42,7 @@ a,nordvpn,on,
 a,logi-options+,on,
 a,http-toolkit,on,
 a,proxyman,on,
+a,webtorrent,on,
 
 ########
 #      #
@@ -58,6 +59,7 @@ a,font-0xproto-nerd-font,on,
 ,exiftool,on,
 ,sevenzip,on,
 ,zoxide,on,
+,localtunnel,on,
 
 #######
 #     #

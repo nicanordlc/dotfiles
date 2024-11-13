@@ -12,12 +12,10 @@ gcl(){
     local repo
     local repo_basename
     local repo_name
-    local DOTS_BASEPATH
 
     repo="$1"
     repo_basename=$(basename "$repo")
     repo_name=${repo_basename%.*} # this remove the `.git` at the end
-    DOTS_BASEPATH="$HOME/.dots"
 
     # Validate that you only pass one parameter
     if [ $# -gt 1 ]
@@ -31,34 +29,12 @@ gcl(){
         return 1
     fi
 
-    # adds this realpath for destroying it later ;)
-    echo "$(realpath $repo_name)" >> "$DOTS_BASEPATH/destroy_paths"
-
     if [ -n "$TMUX" ]; then
         cdtmux "$repo_name"
+		tmux rename-window "$repo_name"
         exit 0
     else
         cd "$repo_name" || exit
     fi
 }
 
-createreactapp(){
-    local opt
-
-    while getopts ":i" opt; do
-        case $opt in
-            i) opt_val="init" ;;
-            *) # do default stuff ;;
-        esac
-    done
-    shift $((OPTIND - 1))
-
-    npx create-react-app "${1:?Provide a name for your new react app ;)}"
-    cd "$1" || exit
-
-    test -z "$opt_val" && return 0
-
-    tmux split-window -p 20 "npm run start"
-    tmux rename-window "$1"
-    $EDITOR ./src/App.js
-}
