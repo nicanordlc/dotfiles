@@ -513,6 +513,7 @@ nnoremap ,w :set wrap!<cr>
 " {{{ marks
 
 " :mark mark /full/directory/path [filename]
+mark i ~/Library/Mobile\ Documents/com\~apple\~CloudDocs
 mark h ~/
 mark D ~/Downloads
 mark d ~/projects/dotfiles

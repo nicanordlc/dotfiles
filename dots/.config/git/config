@@ -2,7 +2,7 @@
 [user]
     email = "nicanordlc.dev@gmail.com"
     name = "nicanordlc"
-    signingkey = 8420CF1BAD499FB0
+    signingkey = C1476203455390D7B79492458420CF1BAD499FB0
 # overwrite: email, name and sshKey (with ssh command <file>)
 [includeIf "gitdir:baires/"]
     path = config-work
