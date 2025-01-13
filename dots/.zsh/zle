@@ -8,13 +8,13 @@ __edit_files() {
     local selected_files
 	selected_files=$(
 		eval $FZF_DEFAULT_COMMAND |
-			fzf -m \
+			fzf \
 				--height 40 \
 				--preview 'bat --style=plain --color=always --line-range=:500 {}' \
 				--preview-window=right:60%
 	)
     if [[ -n "$selected_files" ]]; then
-        $EDITOR $(echo $selected_files)
+		$EDITOR $selected_files
     fi
 	zle reset-prompt
 }

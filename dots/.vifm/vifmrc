@@ -438,7 +438,6 @@ filextype *.svg
 
 " change colon to semi-color (so no need to shift for command)
 nnoremap ; :
-nnoremap : ;
 
 " list messages
 nnoremap ,m :messages<cr>

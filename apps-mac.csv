@@ -15,7 +15,8 @@
 # GUI Apps #
 #          #
 ############
-a,iterm2,on,
+a,iterm2,off,
+a,ghostty,on,
 a,spotify,on,
 a,zoom,on,
 a,discord,on,
@@ -44,6 +45,7 @@ a,http-toolkit,on,
 a,proxyman,on,
 a,webtorrent,on,
 a,obs,on,
+a,raycast,on,
 
 ########
 #      #
@@ -61,6 +63,8 @@ a,font-0xproto-nerd-font,on,
 ,sevenzip,on,
 ,zoxide,on,
 ,localtunnel,on,
+,ffmpeg,on,
+,mpv,on,
 
 #######
 #     #
