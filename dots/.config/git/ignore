@@ -16,3 +16,4 @@ Session*.vim*
 plugins/es-wp-query
 plugins/apple-news
 client-mu-plugins/jetpack
+.phpactor.json
