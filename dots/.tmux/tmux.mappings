@@ -48,6 +48,3 @@ bind C-m command-prompt -p " #S ${TMUX_SWAP_WINDOWS} : Select window to swap :" 
 
 # show tmux messages
 bind M show-messages
-
-# check eps-scapping-api
-bind e run-shell "curl localhost:8000 | jq ."
