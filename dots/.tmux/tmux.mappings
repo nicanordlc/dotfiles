@@ -48,3 +48,6 @@ bind C-m command-prompt -p " #S ${TMUX_SWAP_WINDOWS} : Select window to swap :" 
 
 # show tmux messages
 bind M show-messages
+
+# tmux-fzf
+bind "f" run-shell -b "~/.tmux/plugins/tmux-fzf/scripts/window.sh switch"
