@@ -1,7 +1,7 @@
 #!/bin/bash
 # vim: ft=zsh:ts=4:sw=4
 
-grsh(){
+grsh() {
     # Reset hard a range of commits from git
     if [ -z "$1" ]; then
         echo "How many resets?"
@@ -10,7 +10,7 @@ grsh(){
     git reset --hard HEAD~"${1}"
 }
 
-grss(){
+grss() {
     # Reset soft a range of commits from git
     if [ -z "$1" ]; then
         echo "How many resets?"
@@ -20,7 +20,7 @@ grss(){
     git reset
 }
 
-gps(){
+gps() {
     # Alias to push. Validated and stuffs
     local currentBranch
     currentBranch=$(gcb)
@@ -32,44 +32,48 @@ gps(){
     git push origin "$currentBranch" "${@}"
 }
 
-mk(){
+mk() {
     # Creates the directory and cd to it right away
     mkdir -p -- "$1"
     cd -P -- "$1" || return 1
 }
 
-filetypeb(){
+filetypeb() {
     # To change the End lines of a file
     local INPUT_FILE=$1
 
-    tr -d '\r' < "${INPUT_FILE}" > tmp
+    tr -d '\r' <"${INPUT_FILE}" >tmp
     mv -f tmp "${INPUT_FILE}"
 }
 
-killport(){
+killport() {
     # Given a port kills its process
     fuser -k "$1"/tcp
 }
 
-ee(){
-    clear && nvim
+ee() {
+    nvim +"lua require('persistence').load()"
 }
 
-gpr(){
+gpr() {
+    local BRANCH_NAME
+    local main_branch
     # Git rebases from origin [master]
-    local BRANCH_NAME=$1
-    local main_branch=$(gmain)
+    BRANCH_NAME=$1
+    main_branch=$(gmain)
     git pull --rebase origin "${BRANCH_NAME:-$main_branch}"
 }
 
-gprup(){
+gprup() {
+    local BRANCH_NAME
+    local main_branch
     # Git rebases from upstream [master]
-    local BRANCH_NAME=$1
-    local main_branch=$(gmain)
+    BRANCH_NAME=$1
+    main_branch=$(gmain)
     git pull --rebase upstream "${main_branch:-$main_branch}"
 }
 
-dotar(){
+dotar() {
     # Compress stuff
     local NAME=${1:?"Filename required ¯\\_(ツ)_/¯ <name>.tar.gz"}
     shift
@@ -81,7 +85,7 @@ dotar(){
     echo "Done."
 }
 
-untar(){
+untar() {
     # Decompress stuff
     local NAME=${1:?"Filename required ¯\\_(ツ)_/¯ <name>.tar.gz"}
     local DIST=${2:?"Distribution folder required ¯\\_(ツ)_/¯ <./ | my/path/>"}
@@ -93,7 +97,7 @@ untar(){
     echo "Done."
 }
 
-lstar(){
+lstar() {
     # List tar's files
     local TARGET=${1:?"Filename required ¯\\_(ツ)_/¯ <name>.tar.gz"}
     local DEPTH=${2:-0}
@@ -101,17 +105,16 @@ lstar(){
     tar -tf "${TARGET}" | cut -d/ -f1-$((DEPTH + 1)) | uniq
 }
 
-
-dkb(){
+dkb() {
     docker build "${@:-.}"
 }
 
-pfetch(){
+pfetch() {
     # Uses `peerflix` from npm to download torrents (magnet link)
     peerflix -f . "${@:?"Provide a magnet link to start the download"}"
 }
 
-uftp(){
+uftp() {
     local DST=${1?Mount point not provided}
     fusermount -u "$DST"
 }
