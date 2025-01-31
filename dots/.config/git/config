@@ -29,13 +29,12 @@
     gpg = "!f(){ git log --show-signature -${1:-1}; };f"
     undo = "!f() { git reset --soft HEAD^ && git reset; };f"
 [merge]
-    tool = vim_mergetool
-    conflictstyle = diff3
+    tool = diffview
 [mergetool]
+    prompt = false
     keepBackup = false
-[mergetool "vim_mergetool"]
-    cmd = nvim -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-    trustExitCode = true
+[mergetool "diffview"]
+    cmd = nvim -n -c "DiffviewOpen" "$MERGE"
 [push]
     autoSetupRemote = true
     default = current

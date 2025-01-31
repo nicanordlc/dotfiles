@@ -65,6 +65,7 @@ a,font-0xproto-nerd-font,on,
 ,localtunnel,on,
 ,ffmpeg,on,
 ,mpv,on,
+,lazydocker,on,
 
 #######
 #     #
