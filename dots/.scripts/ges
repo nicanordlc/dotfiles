@@ -4,7 +4,7 @@ set -Eeuo pipefail
 # git-edit-staged - ges
 # This script edit all the staged files in your default $EDITOR
 
-get_staged(){
+get_staged() {
     git status --porcelain=v1 2>/dev/null |
         grep -v '^ D' |
         awk '{print $2}' |
@@ -14,5 +14,4 @@ get_staged(){
 
 [[ -z "$(get_staged)" ]] && exit 0
 
-eval "$EDITOR $(get_staged)"
-
+eval "$EDITOR $(get_staged) +'lua vim.g.ges=true'"
