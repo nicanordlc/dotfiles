@@ -17,4 +17,4 @@ files=$(
         tr '\n' ' '
 )
 
-eval "${EDITOR:-vim} $files"
+eval "${EDITOR:-vim} $files +'lua vim.g.ges=true'"
