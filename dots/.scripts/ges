@@ -14,4 +14,4 @@ get_staged() {
 
 [[ -z "$(get_staged)" ]] && exit 0
 
-eval "$EDITOR $(get_staged) +'lua vim.g.ges=true'"
+eval "$EDITOR $(get_staged)"

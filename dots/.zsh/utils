@@ -52,7 +52,7 @@ killport() {
 }
 
 ee() {
-    nvim +"lua require('persistence').load()"
+    nvim +"lua require('persistence').load(); vim.g.persistence_disabled=false"
 }
 
 gpr() {
