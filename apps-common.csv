@@ -53,6 +53,7 @@ g,github.com/Dentrax/GMDB,off,Movie Library in GO *arrg*
 f,nvm,on,
 ,yarn,on,
 node,diff-so-fancy,on,
+node,@angular/cli,on,
 
 ########
 #      #

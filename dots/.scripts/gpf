@@ -2,14 +2,14 @@
 
 while getopts ":b:r:" opt; do
     case $opt in
-        b) branch="$OPTARG" ;;
-        r) remote="$OPTARG" ;;
-        :)
-            echo "No argument provided for option (-$OPTARG)"
-            ;;
-        \?)
-            echo "Invalid option (-$OPTARG)"
-            ;;
+    b) branch="$OPTARG" ;;
+    r) remote="$OPTARG" ;;
+    :)
+        echo "No argument provided for option (-$OPTARG)"
+        ;;
+    \?)
+        echo "Invalid option (-$OPTARG)"
+        ;;
     esac
 done
 shift $((OPTIND - 1))
@@ -19,10 +19,9 @@ shift $((OPTIND - 1))
 CURRENT_BRANCH=${branch:-$(gcb)}
 ORIGIN=${remote:-origin}
 
-MESSAGE="This will perform a hard reset with the branch \
-'origin/$CURRENT_BRANCH'."
+MESSAGE="This will perform a hard reset with the branch 'origin/$CURRENT_BRANCH'."
 
-echo -e $MESSAGE
+echo -e "$MESSAGE"
 read -rsn1 -p "Do you wish to continue ? [y, n]: " IS_HARD
 echo
 
@@ -31,4 +30,3 @@ echo
 echo "Fetching..."
 git fetch "$ORIGIN" "$CURRENT_BRANCH"
 git reset --hard "$ORIGIN/$CURRENT_BRANCH"
-

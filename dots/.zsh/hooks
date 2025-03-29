@@ -6,14 +6,14 @@
 autoload -U add-zsh-hook
 
 # load env files
-__load_env(){
+__load_env() {
     local ENV_FILE file_found
     # TODO: Maybe this should load multiple files ¯\\_(ツ)_/¯
     ENV_FILE=".nic"
     ls -a |
-        grep "^$ENV_FILE" 2> /dev/null |
+        grep "^$ENV_FILE" 2>/dev/null |
         sed "s:^:$PWD/:" |
-        while read -rs file_found ; do
+        while read -rs file_found; do
             if [ -n "$file_found" ]; then
                 echo "Using environment file '$file_found'"
                 # TODO: check if the variables has the `export` prefix and if
@@ -26,7 +26,7 @@ chpwd_functions+=(__load_env)
 __load_env
 
 # use .nvmrc to load node project version
-__load_nvmrc(){
+__load_nvmrc() {
     local node_version nvmrc_path nvmrc_node_version
     node_version="$(nvm version)"
     nvmrc_path="$(nvm_find_nvmrc)"
@@ -46,7 +46,7 @@ chpwd_functions+=(__load_nvmrc)
 __load_nvmrc
 
 # change emoji in the PS1
-__change_emoji(){
+__change_emoji() {
     local EMOJIS EMOJI_INDEX
     if ! [[ $(uname -s) =~ ^[Dd]arwin$ ]] && [ -z "$DISPLAY" ]; then
         EMOJIS=(
@@ -61,10 +61,10 @@ __change_emoji(){
             "🌟"
             "🤑"
             "💰"
-            "🥺"
-            "🤩"
+            "🔥"
+            "🫨"
             "🤬"
-            "🥱"
+            "🥸"
             "🤨"
         )
     fi
