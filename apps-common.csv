@@ -30,7 +30,7 @@
 ,vifm,on,
 ,gnupg,on,
 ,bat,on,Cat with hightlight
-f,rust,off,
+f,rust,on,
 ,httpie,off,User-friendly curl
 ,direnv,on,
 f,gotop,off,

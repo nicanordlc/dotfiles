@@ -67,6 +67,7 @@ a,font-0xproto-nerd-font,on,
 ,ffmpeg,on,
 ,mpv,on,
 ,lazydocker,on,
+,wget,on,
 
 #######
 #     #
@@ -82,6 +83,8 @@ a,font-0xproto-nerd-font,on,
 ,libmemcached,on,
 ,mkcert,on,
 ,nss,on,
+pip,submit50,on,
+pip,check50,on,
 
 #################
 #               #
