@@ -2,7 +2,7 @@
 # vim: ft=zsh:ts=4:sw=4
 # shellcheck disable=1090
 
-addToPath(){
+addToPath() {
     local ITEM
     for ITEM in "$@"; do
         PATH="$ITEM:$PATH"
@@ -38,7 +38,7 @@ addToPath ~/.cargo/bin
 addToPath ~/.dotnet
 
 # pyenv (python)
-addToPath $(pyenv root)/shims
+addToPath "$(pyenv root)/shims"
 
 # php@7.4
 addToPath /usr/local/opt/php@8.1/bin
@@ -50,18 +50,5 @@ addToPath /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/
 # bun
 addToPath ~/.bun/bin
 
-########################
-#                      #
-# This need to go last #
-#                      #
-########################
-
-# ruby (homebrew)
-addToPath /usr/local/opt/ruby/bin
-addToPath /usr/local/lib/ruby/gems/3.0.0/bin
-export LDFLAGS="-L/usr/local/opt/ruby/lib"
-export CPPFLAGS="-I/usr/local/opt/ruby/include"
-export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
-
-# Load RVM into a shell session *as a function*
-[[ -s ~/.rvm/scripts/rvm ]] && . ~/.rvm/scripts/rvm
+# ruby
+addToPath ~/.rvm/bin
