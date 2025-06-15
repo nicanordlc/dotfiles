@@ -43,6 +43,7 @@ f,bun,on,
 ######
 f,go,off,
 g,github.com/Dentrax/GMDB,off,Movie Library in GO *arrg*
+g,github.com/wailsapp/wails/v2/cmd/wails@latest,off,
 
 ##########
 #        #
@@ -54,6 +55,8 @@ f,nvm,on,
 ,yarn,on,
 node,diff-so-fancy,on,
 node,@angular/cli,on,
+node,commitizen,on,
+node,git-cz,on,
 
 ########
 #      #
@@ -72,6 +75,7 @@ gem,neovim,on,
 ,pyenv,on,
 ,python3,on,
 ,pipx,on,
+pip,uv,on,
 pip,doge,on,
 
 #######
