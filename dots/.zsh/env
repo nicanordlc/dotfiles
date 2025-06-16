@@ -4,7 +4,7 @@
 
 # Default
 # =======
-export OS=$(getos 2> /dev/null)
+export OS=$(getos 2>/dev/null)
 export EDITOR=nvim
 export TERMINAL=termite
 export MANPAGER='nvim +Man!'
@@ -39,7 +39,7 @@ export SPACESHIP_GCLOUD_SHOW="false"
 # GPG
 # ===
 export GPG_TTY=$(tty)
-export GPG_ID="8420CF1BAD499FB0"
+export GPG_ID="C1476203455390D7B79492458420CF1BAD499FB0"
 
 # GoLang
 export GOROOT="$HOME/.go"
@@ -52,5 +52,5 @@ export VIFM="$HOME/.vifm"
 # tmux
 # ====
 if [ -n "$IS_VAGRANT" ]; then
-    export ZSH_TMUX_AUTOSTART=true
+	export ZSH_TMUX_AUTOSTART=true
 fi

@@ -112,7 +112,7 @@ alias cdvagrant='cd /vagrant/'
 # Docker
 # ======
 alias dk='docker'
-alias dkc='docker-compose'
+alias dkc='docker compose'
 alias dki='docker images -a'
 alias dkps='docker ps'
 alias dkrit='docker run -it'
@@ -176,3 +176,4 @@ alias hostsupdate='sudo killall -HUP mDNSResponder'
 alias resetaudio='sudo killall coreaudiod'
 alias check='rg -g \!.git --hidden'
 alias checkport='nc -zv ' # <ip> <port>
+# alias ctop='TERM="${TERM/#tmux/screen}" ctop'
