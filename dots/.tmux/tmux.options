@@ -1,5 +1,7 @@
 # vim: ft=tmux
 
+set -g default-terminal screen-256color
+
 # Stop auto-renaming window
 set -g allow-rename off
 
