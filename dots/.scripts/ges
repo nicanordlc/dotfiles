@@ -2,16 +2,21 @@
 set -Eeuo pipefail
 
 # git-edit-staged - ges
-# This script edit all the staged files in your default $EDITOR
+# This script edits all the staged files in your default $EDITOR
 
 get_staged() {
     git status --porcelain=v1 2>/dev/null |
         grep -v '^ D' |
         awk '{print $2}' |
-        sed "s#^#$PWD/#" |
+        xargs -I {} sh -c 'if [ -f "{}" ]; then echo "{}"; fi' |
         tr '\n' ' '
 }
 
-[[ -z "$(get_staged)" ]] && exit 0
+# Check if there are any staged files to edit
+staged_files=$(get_staged)
+if [[ -z "$staged_files" ]]; then
+    exit 0
+fi
 
-eval "$EDITOR $(get_staged)"
+# Open the staged files in the editor
+eval "$EDITOR $staged_files"
