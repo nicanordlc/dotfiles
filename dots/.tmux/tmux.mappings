@@ -51,3 +51,4 @@ bind M show-messages
 
 # tmux-fzf
 bind "f" run-shell -b "~/.tmux/plugins/tmux-fzf/scripts/window.sh switch"
+bind "e" run-shell -b "~/.tmux/plugins/tmux-fzf/scripts/menu.sh"
