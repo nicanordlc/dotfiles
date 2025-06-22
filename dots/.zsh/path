@@ -52,3 +52,6 @@ addToPath ~/.bun/bin
 
 # ruby
 addToPath ~/.rvm/bin
+
+# LM Studio CLI (lms)
+addToPath ~/.lmstudio/bin

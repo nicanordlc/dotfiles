@@ -19,8 +19,10 @@ export GIT_PS1_STATESEPARATOR=" "
 export GIT_PS1_DESCRIBE_STYLE="branch"
 export GIT_PS1_SHOWCOLORHINTS=1
 
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/nicanordlc/.lmstudio/bin"
