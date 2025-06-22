@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 prepend_keymap = [
 	# goto
 	{ on = [ "g", "d" ], run = "cd ~/projects/dotfiles", desc = "Go to the dotfiles directory" },
