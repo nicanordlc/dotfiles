@@ -49,6 +49,12 @@ a,raycast,on,
 a,pgadmin4,off,
 a,qnapi,off,Subtitle Download Engine
 a,diffusionbee,off,
+a,autodesk-fusion,off,
+a,diffusionbee,off,
+a,ledger-live,off,
+a,orcaslicer,off,
+a,vscodium,off,
+a,void,on,
 
 ########
 #      #
