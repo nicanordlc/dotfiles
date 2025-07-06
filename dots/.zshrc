@@ -1,7 +1,7 @@
 # ¯\_(ツ)_/¯
 [[ $- != *i* ]] && return
 
-# Script to source (¯\_(ツ)_/¯)
+# Script to source sources
 . ~/.scripts/sourceifexists
 
 # Mac related (¯\\_(ツ)_/¯)

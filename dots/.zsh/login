@@ -1,13 +1,10 @@
 #!/bin/bash
+# shellcheck disable=1090
 # vim: ft=zsh:ts=4:sw=4
 
-######################################################################
-#                                                                    #
-# all inside this file will be initialized at the login of the shell #
-#                                                                    #
-######################################################################
+source ~/.bun/_bun
 
-gcl(){
+gcl() {
     # Clones a repository and cd into it ( :
     local repo
     local repo_basename
@@ -18,10 +15,9 @@ gcl(){
     repo_name=${repo_basename%.*} # this remove the `.git` at the end
 
     # Validate that you only pass one parameter
-    if [ $# -gt 1 ]
-    then
-      echo "Just pass the repo URL as a parameter"
-      exit 1
+    if [ $# -gt 1 ]; then
+        echo "Just pass the repo URL as a parameter"
+        exit 1
     fi
 
     # if cloning the repo fails finish this function
@@ -31,10 +27,9 @@ gcl(){
 
     if [ -n "$TMUX" ]; then
         cdtmux "$repo_name"
-		tmux rename-window "$repo_name"
+        tmux rename-window "$repo_name"
         exit 0
     else
         cd "$repo_name" || exit
     fi
 }
-
