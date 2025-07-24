@@ -1,0 +1,16 @@
+#!/bin/bash
+# vim: ft=zsh:ts=4:sw=4
+
+___git_branch_names() {
+  local -a branches
+
+  if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+    return 1
+  fi
+
+  branches=("${(@f)$(git for-each-ref --format='%(refname:short)' refs/heads)}")
+
+  _describe -t branches 'local branches' branches
+}
+
+compdef ___git_branch_names gsqt

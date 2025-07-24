@@ -10,8 +10,14 @@ case "$(uname -s)" in
 esac
 
 # Import configurations
-sourceIfExists -imac -ihooks ~/.zsh/*
-sourceIfExists ~/.zsh/hooks # this order matters
+sourceIfExists \
+    -imac \
+    -ihooks \
+    -icompletion \
+    ~/.zsh/*
+sourceIfExists \
+    ~/.zsh/hooks \
+    ~/.zsh/completion
 
 # Package manager for `zsh`
 sourceIfExists ~/.antigenrc
