@@ -1,8 +1,7 @@
 # vim: ft=gitconfig
 [user]
-	email = "C-NDelaCruz@nexstar.tv"
-	name = "ndelacruz-nexstar"
-
+    email = "C-NDelaCruz@nexstar.tv"
+    name = "ndelacruz-nexstar"
+    signingkey = 0B99C48E1327B03F9ED058780D89AD70205C486B
 [core]
     sshCommand = "ssh -i ~/.ssh/id_ed25519_nexstar"
-
