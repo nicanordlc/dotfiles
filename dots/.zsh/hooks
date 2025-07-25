@@ -47,29 +47,37 @@ __load_nvmrc
 
 # change emoji in the PS1
 __change_emoji() {
-    local EMOJIS EMOJI_INDEX
+    local EMOJIS EMOJI_INDEX ASCII SELECTED_EMOJI
+    ASCII=(
+        "(づ￣ ³￣)づ"
+        "(ง •̀_•́)ง"
+        "(●__●)"
+        "(╯°□°）╯︵ ┻━┻"
+        "(▀̿Ĺ̯▀̿ ̿)"
+        "ᕦ(ò_óˇ)ᕤ"
+    )
     if ! [[ $(uname -s) =~ ^[Dd]arwin$ ]] && [ -z "$DISPLAY" ]; then
-        EMOJIS=(
-            "(づ￣ ³￣)づ"
-            "(ง •̀_•́)ง"
-            "(╥_╥)"
-            "(●__●)"
-            "(╯°□°）╯︵ ┻━┻"
-        )
+        EMOJIS=(${ASCII[*]})
     else
         EMOJIS=(
-            "🌟"
-            "🤑"
-            "💰"
-            "🔥"
             "🫨"
-            "🤬"
+            "🫠"
             "🥸"
             "🤨"
+            ${ASCII[*]}
+
         )
     fi
-    EMOJI_INDEX=$((RANDOM % ${#EMOJIS[@]} + 1))
-    SPACESHIP_CHAR_SUFFIX="${EMOJIS[$EMOJI_INDEX]} "
+    RANDOM_NUM=$RANDOM
+    EMOJI_INDEX=$((RANDOM_NUM % ${#EMOJIS[@]} + 1))
+    SELECTED_EMOJI=${EMOJIS[$EMOJI_INDEX]}
+    if [[ $(</tmp/prompt-emoji) = ${SELECTED_EMOJI} ]]; then
+        PLUS=$((RANDOM_NUM + 1))
+        EMOJI_INDEX=$((PLUS % ${#EMOJIS[@]} + 1))
+        SELECTED_EMOJI=${EMOJIS[$EMOJI_INDEX]}
+    fi
+    SPACESHIP_CHAR_SUFFIX="${SELECTED_EMOJI} "
+    echo ${SELECTED_EMOJI} > /tmp/prompt-emoji
 }
 chpwd_functions+=(__change_emoji)
 __change_emoji
