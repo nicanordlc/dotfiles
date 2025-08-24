@@ -49,6 +49,8 @@ export GOPATH="$HOME/go"
 # ====
 export VIFM="$HOME/.vifm"
 
+export ATAC_KEY_BINDINGS="$HOME/.config/atac/key_bindings.toml"
+
 # tmux
 # ====
 if [ -n "$IS_VAGRANT" ]; then

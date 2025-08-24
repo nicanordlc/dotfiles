@@ -55,6 +55,8 @@ a,ledger-live,off,
 a,orcaslicer,off,
 a,vscodium,off,
 a,void,on,
+a,thonny,on,Microcontroller IDE
+a,audacity,on,Audio Editor
 
 ########
 #      #
@@ -79,6 +81,7 @@ a,font-0xproto-nerd-font,on,
 ,imagemagick,on,
 ,resvg,on,
 ,7zip,on,
+,atac,on,Postman Like on terminal
 
 #######
 #     #

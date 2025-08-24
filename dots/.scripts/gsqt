@@ -2,3 +2,4 @@
 set -Eeuo pipefail
 
 git merge --squash --strategy-option theirs "$@"
+git commit

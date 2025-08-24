@@ -77,6 +77,7 @@ __change_emoji() {
         SELECTED_EMOJI=${EMOJIS[$EMOJI_INDEX]}
     fi
     SPACESHIP_CHAR_SUFFIX="${SELECTED_EMOJI} "
+    touch /tmp/prompt-emoji
     echo ${SELECTED_EMOJI} > /tmp/prompt-emoji
 }
 chpwd_functions+=(__change_emoji)
