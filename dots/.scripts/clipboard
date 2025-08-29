@@ -1,115 +1,75 @@
-#!/bin/bash -e
+#!/bin/bash
+set -Eeuo pipefail
 
 # NAME
 #     clipboard
-
+#
 # Usage:
-#     clipboard [OPTION] [ARG]...
-
+#     clipboard -c [ARG]...
+#     clipboard -p
+#
 # Options
 #     -c      Copy mode
 #     -p      Paste mode
 
-SUPPORTED_CLIPBOARDS=(
-    pbcopy
-    xsel
-    xclip
-    lemonade
-    doitclient
-    tmux
+SUPPORTED_COPY_CMDS=(
+    "pbcopy"
+    "tmux load-buffer -"
+)
+SUPPORTED_PASTE_CMDS=(
+    "pbpaste"
+    "tmux save-buffer -"
 )
 
-__show_help(){
-echo "
-NAME
-    clipboard
+copy_cmd=""
+paste_cmd=""
 
-Usage:
-    clipboard [OPTION] [ARG]...
-
-Options
-    -c      Copy mode
-    -p      Paste mode
-"
-}
-
-__get_clipboard(){
-    local CLIP
-    for CLIP in ${SUPPORTED_CLIPBOARDS[*]}; do
-        if command -v "$CLIP" &> /dev/null; then
-            echo "$CLIP"
-            break
-        fi
-    done
-}
-
-__pbcopy(){
-    pbcopy <<<"$COPY_ME"
-    echo "$COPY_ME : Copied to clipboard"
-}
-
-__tmux_copy(){
-    if [ "$MODE" != "c" ]; then
-        return 0
+# Pick first available clipboard backend
+for i in "${!SUPPORTED_COPY_CMDS[@]}"; do
+    candidate_copy=$(awk '{print $1}' <<<"${SUPPORTED_COPY_CMDS[$i]}")
+    if command -v "$candidate_copy" &>/dev/null; then
+        copy_cmd="${SUPPORTED_COPY_CMDS[$i]}"
+        paste_cmd="${SUPPORTED_PASTE_CMDS[$i]}"
+        break
     fi
-    if tmux set-buffer "$COPY_ME"
-    then
-        echo "$COPY_ME : Copied to TMUX Clipboard"
-    else
-        echo "TMUX Server might be not running"
-    fi
-}
+done
 
-__tmux_paste(){
-    if [ "$MODE" != "p" ]; then
-        return 0
-    fi
-    tmux showb
-}
+if [[ -z "$copy_cmd" ]]; then
+    echo "Error: No supported clipboard backend found (pbcopy or tmux)." >&2
+    exit 1
+fi
 
-__copy_mode(){
-    if [ "$MODE" != "c" ]; then
-        return 0
-    fi
-    if [ $# -eq 0 ]; then
-        read -rs COPY_ME
-    else
-        COPY_ME=$*
-    fi
-    if [ -z "$COPY_ME" ]; then
-        return 1
-    fi
-}
-
-while getopts ":cp" OPT; do
-    case $OPT in
-        p)
-            MODE="p"
-            ;;
-        c)
-            shift
-            MODE="c"
-            __copy_mode "$@"
-            ;;
-        *) # do default stuff ;;
+mode=""
+while getopts ":cp" opt; do
+    case "$opt" in
+    c) mode="copy" ;;
+    p) mode="paste" ;;
+    *)
+        echo "Usage: $0 -c [ARG]... | -p" >&2
+        exit 1
+        ;;
     esac
 done
 shift $((OPTIND - 1))
 
-if [ -z "$MODE" ]; then
-    __show_help
+case "$mode" in
+copy)
+    if [ $# -gt 0 ]; then
+        input="$*"
+    elif [ ! -t 0 ]; then
+        input="$(cat)"
+    else
+        echo "Error: No input provided for copy mode" >&2
+        exit 1
+    fi
+    printf "%s" "$input" | eval "$copy_cmd"
+    echo "Copied to clipboard ✔"
+    ;;
+paste)
+    eval "$paste_cmd"
+    ;;
+*)
+    echo "Usage: $0 -c [ARG]... | -p" >&2
     exit 1
-fi
-
-case "$(__get_clipboard)" in
-    pbcopy)
-        __pbcopy
-        ;;
-    tmux)
-        __tmux_copy
-        __tmux_paste
-        ;;
-    *)
-        echo "[No clipboard]: $COPY_ME"
-        ;;
+    ;;
 esac
