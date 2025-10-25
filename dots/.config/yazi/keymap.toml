@@ -22,4 +22,7 @@ prepend_keymap = [
 	## toggle-pane
 	{ on = ["'", "t", "h"], run = "plugin toggle-pane min-parent", desc = "Toggle left pane" },
 	{ on = ["'", "t", "l"], run = "plugin toggle-pane min-preview", desc = "Toggle right pane" },
+
+	# copy
+	{ on = ["'", "c"], run = 'shell -- cat "$@" | clipboard -c', desc = "Copy file content" },
 ]

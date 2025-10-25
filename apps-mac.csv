@@ -57,6 +57,7 @@ a,vscodium,off,
 a,void,on,
 a,thonny,on,Microcontroller IDE
 a,audacity,on,Audio Editor
+a,comfyui,on,
 
 ########
 #      #
@@ -83,6 +84,7 @@ a,font-0xproto-nerd-font,on,
 ,7zip,on,
 ,atac,on,Postman Like on terminal
 ,nmap,on,
+,git-lfs,on,
 
 #######
 #     #

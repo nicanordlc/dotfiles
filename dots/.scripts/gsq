@@ -12,5 +12,4 @@ else
     test "$SQUASH" -lt 2 && exit 0
 fi
 
-
 git rebase -i HEAD~"$SQUASH"
