@@ -1,31 +1,25 @@
 #!/bin/bash
 set -Eeuo pipefail
 
-# documentation about osascript dictionary
-# https://apple.stackexchange.com/questions/46521/how-do-i-find-out-the-applescript-commands-available-for-a-particular-app
-
-# exit if spotify is not running
-if ! ps aux | grep -v grep | grep spotify &> /dev/null; then
-  echo "🎹"
-  exit 1
+# 1. Check if Spotify is running without using grep
+if ! pgrep -x "Spotify" >/dev/null; then
+    echo "🎹"
+    exit 0 # Exit gracefully if not running
 fi
 
-paused="⏸️ "
-playing="▶️ "
+# 2. Fetch all metadata in a single AppleScript call
+# We use a custom delimiter ( | ) to split the data easily in bash
+IFS='|' read -r state artist track <<EOF
+$(osascript -e 'tell application "Spotify"
+    set track_name to name of current track
+    set artist_name to artist of current track
+    set player_state to player state as string
+    return player_state & "|" & artist_name & "|" & track_name
+end tell' 2>/dev/null)
+EOF
 
-get() {
-    local cmd
-    cmd=${*:-}
-    osascript -e "tell application \"Spotify\" to $cmd"
-}
+# 3. Assign icons based on state
+[[ "$state" == "playing" ]] && icon="▶️ " || icon="⏸️ "
 
-if [ "$(get "player state as string")" == "paused" ]; then
-    state=$paused
-else
-    state=$playing
-fi
-
-artist=$(get "artist of current track as string")
-track=$(get "name of current track as string")
-
-echo "$state$artist [$track]"
+# 4. Output results
+echo "${icon}${artist} [${track}]"
