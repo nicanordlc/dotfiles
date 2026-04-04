@@ -85,6 +85,8 @@ a,font-0xproto-nerd-font,on,
 ,atac,on,Postman Like on terminal
 ,nmap,on,
 ,git-lfs,on,
+,pie,off,Installer for PHP Extensions
+,gh,on,
 
 #######
 #     #
@@ -102,6 +104,7 @@ a,font-0xproto-nerd-font,on,
 ,nss,on,
 pip,submit50,on,
 pip,check50,on,
+,coreutils,off,
 
 #################
 #               #
