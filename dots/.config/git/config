@@ -3,11 +3,6 @@
     email = "nicanordlc.dev@gmail.com"
     name = "nicanordlc"
     signingkey = C1476203455390D7B79492458420CF1BAD499FB0
-# overwrite: email, name and sshKey (with ssh command <file>)
-[includeIf "gitdir:baires/"]
-    path = config-work
-[includeIf "gitdir:nexstar/"]
-    path = config-nexstar
 # common config
 [alias]
     chp = cherry-pick
@@ -70,3 +65,8 @@
 	required = true
 [commit]
 	gpgsign = true
+# overwrite: email, name and sshKey (with ssh command <file>)
+[includeIf "gitdir:baires/"]
+    path = config-work
+[includeIf "gitdir:nexstar/"]
+    path = config-nexstar
