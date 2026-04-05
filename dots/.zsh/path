@@ -55,3 +55,9 @@ addToPath ~/.rvm/bin
 
 # LM Studio CLI (lms)
 addToPath ~/.lmstudio/bin
+
+# bin on Downloads folder (kinda temp)
+addToPath ~/Downloads/bin
+
+# antigravity
+addToPath ~/.antigravity/antigravity/bin
