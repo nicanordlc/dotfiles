@@ -62,3 +62,7 @@ export XDEBUG_CONFIG="idekey=VSCODE"
 if [ -n "$IS_VAGRANT" ]; then
 	export ZSH_TMUX_AUTOSTART=true
 fi
+
+# claude-code
+export ANTHROPIC_BASE_URL=http://localhost:1234
+export ANTHROPIC_AUTH_TOKEN=lmstudio

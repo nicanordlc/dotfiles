@@ -1,0 +1,114 @@
+{
+  "numStartups": 6,
+  "installMethod": "native",
+  "autoUpdates": false,
+  "tipsHistory": {
+    "new-user-warmup": 1,
+    "plan-mode-for-complex-tasks": 1,
+    "terminal-setup": 1,
+    "memory-command": 3,
+    "theme-command": 3,
+    "status-line": 3,
+    "prompt-queue": 3,
+    "enter-to-steer-in-relatime": 3,
+    "todo-list": 3,
+    "default-permission-mode-config": 3,
+    "ide-upsell-external-terminal": 4,
+    "install-github-app": 4,
+    "install-slack-app": 5,
+    "drag-and-drop-images": 5,
+    "paste-images-mac": 6,
+    "double-esc-code-restore": 6
+  },
+  "hasCompletedOnboarding": true,
+  "firstStartTime": "2026-05-03T22:43:11.864Z",
+  "opusProMigrationComplete": true,
+  "sonnet1m45MigrationComplete": true,
+  "userID": "f9fc014a036252ea58e42b72035e56506e26d07184e185e44a52eee5e7c7297a",
+  "cachedChromeExtensionInstalled": false,
+  "changelogLastFetched": 1777848192126,
+  "projects": {
+    "/Users/nicanordlc/projects/dotfiles": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 2,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "tmux.env",
+        "apps-mac.csv",
+        ".zshrc",
+        "path",
+        "keymap.toml"
+      ],
+      "exampleFilesGeneratedAt": 1777848256835,
+      "lastCost": 0.0792304,
+      "lastAPIDuration": 214463,
+      "lastAPIDurationWithoutRetries": 214433,
+      "lastToolDuration": 0,
+      "lastDuration": 541486,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 24463,
+      "lastTotalOutputTokens": 431,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 42,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 7.4,
+      "lastFpsLow1Pct": 491.63,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 226,
+          "outputTokens": 18,
+          "cacheReadInputTokens": 21,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0003181
+        },
+        "mistralai/magistral-small-2509": {
+          "inputTokens": 24237,
+          "outputTokens": 413,
+          "cacheReadInputTokens": 21,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0789123
+        }
+      },
+      "lastSessionId": "899a175c-98e1-4818-84d7-e6cbb5317ee6",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 4001,
+        "frame_duration_ms_min": 0.026332999987062067,
+        "frame_duration_ms_max": 5.983375000000024,
+        "frame_duration_ms_avg": 0.5469189022743,
+        "frame_duration_ms_p50": 0.4023329999909038,
+        "frame_duration_ms_p95": 1.3408481999998911,
+        "frame_duration_ms_p99": 1.9733630899959818
+      },
+      "lastGracefulShutdown": false,
+      "lastHintSessionId": "78590f62-e665-4597-8a0d-013698312a90",
+      "lastSessionFirstPrompt": "migrate bash system to golang",
+      "lastSessionModified": 1777854679505
+    }
+  },
+  "githubRepoPaths": {
+    "nicanordlc/dotfiles": [
+      "/Users/nicanordlc/projects/dotfiles"
+    ]
+  },
+  "clientDataCache": {
+    "data": null,
+    "timestamp": 1777848256183
+  },
+  "lastReleaseNotesSeen": "2.1.126",
+  "officialMarketplaceAutoInstallAttempted": true,
+  "officialMarketplaceAutoInstalled": true,
+  "autoUpdatesProtectedForNative": true,
+  "seenNotifications": {},
+  "migrationVersion": 13,
+  "hasUsedBackslashReturn": true,
+  "lastPlanModeUse": 1777853603934
+}

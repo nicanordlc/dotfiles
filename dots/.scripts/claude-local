@@ -1,0 +1,13 @@
+#!/bin/bash
+
+model_name=$(lms ps | awk '$1 != "IDENTIFIER" && $1 != "No" && $1 != "" && $1 !~ /^-+$/ {print $1; exit}')
+
+if [[ -z "$model_name" ]]; then
+    echo "❌ Error: No model detected in LM Studio."
+    echo "Ensure your model is loaded and 'lms ps' shows it as RUNNING."
+    exit 1
+fi
+
+echo "🤖 Connecting Claude to: $model_name"
+
+claude --model "$model_name" "$@"
