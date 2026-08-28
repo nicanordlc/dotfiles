@@ -59,6 +59,7 @@ a,thonny,on,Microcontroller IDE
 a,audacity,on,Audio Editor
 a,comfyui,on,
 a,claude-code,on,
+a,localsend,on,
 
 ########
 #      #
@@ -88,6 +89,7 @@ a,font-0xproto-nerd-font,on,
 ,git-lfs,on,
 ,pie,off,Installer for PHP Extensions
 ,gh,on,
+,anomalyco/tap/opencode,on,
 
 #######
 #     #
@@ -106,6 +108,7 @@ a,font-0xproto-nerd-font,on,
 pip,submit50,on,
 pip,check50,on,
 ,coreutils,off,
+,mingw-w64,on,
 
 #################
 #               #

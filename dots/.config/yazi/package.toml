@@ -1,17 +1,17 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "3d1efb7"
-hash = "47865a70cade14a0b9b6bc6a54f16bdb"
+rev = "0be29a9"
+hash = "a2b67c52fc36d4c7d3ccb8940d9a140"
 
 [[plugin.deps]]
 use = "dedukun/relative-motions"
-rev = "2e3b617"
-hash = "b67ee12053113983273e9118a7d1272b"
+rev = "a603d9e"
+hash = "e02a788e5b8ae0fb47fd0193dda589cc"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "3d1efb7"
-hash = "d6f60c24d8c0cf57a855bf46115b2502"
+rev = "0be29a9"
+hash = "15e5b67a241172cbb86b8fbf9e63692"
 
 [flavor]
 deps = []

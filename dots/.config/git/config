@@ -23,6 +23,7 @@
     todo = grep -EIn "TODO|FIXME"
     gpg = "!f(){ git log --show-signature -${1:-1}; };f"
     undo = "!f() { git reset --soft HEAD^ && git reset; };f"
+    subupdate = submodule update --init --recursive --progress
 [merge]
     tool = diffview
 [mergetool]
